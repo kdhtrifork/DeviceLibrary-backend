@@ -18,7 +18,7 @@ app.get('/devices', (req, res) => {
   req.db.get('devices').find({}).then((devices) => {
     res.send(devices)
   }, (error) => {
-    res.error(error)
+    res.sendStatus(500).send(error);
   });
 });
 
@@ -27,7 +27,7 @@ app.get('/devices/:id', (req, res) => {
   req.db.get('devices').find({_id: req.params.id}).then((device) => {
     res.send(device);
   }, (error) => {
-    res.error(error);
+    res.sendStatus(500).send(error);
   })
 });
 
@@ -36,7 +36,7 @@ app.post('/devices', (req, res) => {
   req.db.get('devices').insert(req.body).then((device) => {
     res.send(device);
   }, (error) => {
-    res.error(error);
+    res.sendStatus(500).send(error);
   });
 });
 
@@ -44,7 +44,7 @@ app.put('/devices/:id', (req, res) => {
   req.db.get('devices').update({_id: req.params.id}, req.body).then((device) => {
     res.send(device);
   }, (error) => {
-    res.error(error);
+    res.sendStatus(500).send(error);
   });
 });
 
